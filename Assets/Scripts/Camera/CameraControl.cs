@@ -86,7 +86,7 @@ public class CameraControl : MonoBehaviour {
 
     }
 
-    public void SetStartPosition(){
+    public void SetStartPositionAndSize(){
 
         FindAveragePosition();
 

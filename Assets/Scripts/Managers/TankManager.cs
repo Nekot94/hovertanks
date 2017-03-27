@@ -7,11 +7,10 @@ using UnityEngine;
 public class TankManager {
     public Color playerColor;
     public Transform spawnPoint;
-    [HideInInspector]
-    public int playerNumber;
-    [HideInInspector]
-    public string coloredPlayerText; 
+    [HideInInspector] public int playerNumber;
+    [HideInInspector] public string coloredPlayerText; 
     [HideInInspector] public GameObject instance;
+    [HideInInspector] public int wins;
 
     private TankMovement movement;
     private TankShooting shooting;
