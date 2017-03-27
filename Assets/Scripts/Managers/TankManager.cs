@@ -4,13 +4,18 @@ using System;
 using UnityEngine;
 
 [Serializable]
-public class TankManager {
+public class TankManager
+{
     public Color playerColor;
     public Transform spawnPoint;
-    [HideInInspector] public int playerNumber;
-    [HideInInspector] public string coloredPlayerText; 
-    [HideInInspector] public GameObject instance;
-    [HideInInspector] public int wins;
+    [HideInInspector]
+    public int playerNumber;
+    [HideInInspector]
+    public string coloredPlayerText;
+    [HideInInspector]
+    public GameObject instance;
+    [HideInInspector]
+    public int wins;
 
     private TankMovement movement;
     private TankShooting shooting;
@@ -30,12 +35,12 @@ public class TankManager {
 
         MeshRenderer[] renderers = instance.GetComponentsInChildren<MeshRenderer>();
 
-        for (int i = 0;i < renderers.Length;i++)
+        for (int i = 0; i < renderers.Length; i++)
         {
             renderers[i].material.color = playerColor;
         }
     }
-    
+
     public void DisableControl()
     {
         movement.enabled = false;

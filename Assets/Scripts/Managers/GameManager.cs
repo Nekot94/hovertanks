@@ -58,13 +58,15 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator GameLoop()
     {
-        yield return StartCoroutine (RoundStarting());
-        yield return StartCoroutine (RoundPlaying());
-        yield return StartCoroutine (RoundEnding());
+        yield return StartCoroutine(RoundStarting());
+        yield return StartCoroutine(RoundPlaying());
+        yield return StartCoroutine(RoundEnding());
 
-        if (gameWinner != null) {
-            SceneManager.LoadScene (0);
-        } else
+        if (gameWinner != null)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
         {
             StartCoroutine(GameLoop());
         }
@@ -73,10 +75,10 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundStarting()
     {
-        ResetAllTanks ();
-        DisableTankControl ();
+        ResetAllTanks();
+        DisableTankControl();
 
-        cameraControl.SetStartPositionAndSize ();
+        cameraControl.SetStartPositionAndSize();
 
         roundNumber++;
         messageText.text = "РАУНД " + roundNumber;
@@ -90,7 +92,7 @@ public class GameManager : MonoBehaviour
 
         messageText.text = string.Empty;
 
-        while (!OneTankLeft ())
+        while (!OneTankLeft())
         {
             yield return null;
         }
@@ -99,9 +101,9 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RoundEnding()
     {
-        DisableTankControl ();
+        DisableTankControl();
         roundWinner = null;
-        roundWinner = GetRoundWinner ();
+        roundWinner = GetRoundWinner();
 
         if (roundWinner != null)
             roundWinner.wins++;
@@ -174,7 +176,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetAllTanks()
     {
-        for (int i = 0; i< tanks.Length; i++)
+        for (int i = 0; i < tanks.Length; i++)
         {
             tanks[i].Reset();
         }
