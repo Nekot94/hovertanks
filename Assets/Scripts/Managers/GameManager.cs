@@ -7,13 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public int numberOfLivePlayers = 2;
     public int numRoundsToWin = 5;
     public float startDelay = 1.5f;
     public float endDelay = 1.5f;
     public CameraControl cameraControl;
     public Text messageText;
-    public GameObject tankPrefab;
+    public GameObject[] tankPrefabs;
     public TankManager[] tanks;
+    public List<Transform> wayPointsForAI;
 
     private int roundNumber;
     private WaitForSeconds startWait;
@@ -34,12 +36,20 @@ public class GameManager : MonoBehaviour
 
     private void SpawnAllTanks()
     {
-        for (int i = 0; i < tanks.Length; i++)
+        for (int i = 0; i < numberOfLivePlayers; i++)
         {
-            tanks[i].instance = Instantiate(tankPrefab, tanks[i].spawnPoint.position,
+            tanks[i].instance = Instantiate(tankPrefabs[i], tanks[i].spawnPoint.position,
                 tanks[i].spawnPoint.rotation);
             tanks[i].playerNumber = i + 1;
-            tanks[i].Setup();
+            tanks[i].SetupPlayerTank();
+        }
+
+        for (int i = numberOfLivePlayers; i < tanks.Length; i++)
+        {
+            tanks[i].instance = Instantiate(tankPrefabs[i], tanks[i].spawnPoint.position,
+                tanks[i].spawnPoint.rotation);
+            tanks[i].playerNumber = i + 1;
+            tanks[i].SetupAI(wayPointsForAI);
         }
     }
 

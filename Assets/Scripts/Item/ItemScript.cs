@@ -60,7 +60,21 @@ public class ItemScript : MonoBehaviour
         } 
     }
 
+    public void ChooseRandomState()
+    {
+        int stateNumber = Random.Range(0,
+            System.Enum.GetNames(typeof(ItemStates)).Length);
+        itemState = (ItemStates)stateNumber;
+        ChooseColor(); 
+    }
 
+    public void ChooseColor()
+    {
+        Color itemColor = stateColors[(int)itemState];
+        Material itemMaterial = GetComponent<Renderer>().material;
+        itemMaterial.color = itemColor;
+        itemMaterial.SetColor("_EmissionColor", itemColor);
+    }
 
 
 }

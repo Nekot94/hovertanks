@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class TankShooting : MonoBehaviour
 {
+    public float delay = 1f;
     public int playerNumber = 1;
     public Rigidbody shell;
     public Transform firePlace;
@@ -20,6 +21,7 @@ public class TankShooting : MonoBehaviour
     private float currentLaunchForce;
     private float chargeSpeed;
     private bool fired;
+    private float nextFireTime;
 
     private void OnEnable()
     {
@@ -37,7 +39,7 @@ public class TankShooting : MonoBehaviour
         if (currentLaunchForce >= maxLaunchForce && !fired)
         {
             currentLaunchForce = maxLaunchForce;
-            Fire();
+            Fire(currentLaunchForce, delay);
         }
         else if (Input.GetButtonDown(fireButton))
         {
@@ -53,18 +55,22 @@ public class TankShooting : MonoBehaviour
         }
         else if (Input.GetButtonUp(fireButton) && !fired)
         {
-            Fire();
+            Fire(currentLaunchForce, delay);
         }
-    } 
-    public void Fire()
+    }
+    public void Fire(float launchForce, float fireRate)
     {
-        fired = true;
-        Rigidbody shellInstance = Instantiate(shell, firePlace.position,
-            firePlace.rotation) as Rigidbody;
-        shellInstance.velocity = currentLaunchForce * firePlace.forward;
-        shootingAudio.clip = fireClip;
-        shootingAudio.Play();
-        currentLaunchForce = minLaunchForce;
+        if (Time.time > nextFireTime)
+        {
+            nextFireTime = Time.time + fireRate;
+            fired = true;
+            Rigidbody shellInstance = Instantiate(shell, firePlace.position,
+                firePlace.rotation) as Rigidbody;
+            shellInstance.velocity = launchForce * firePlace.forward;
+            shootingAudio.clip = fireClip;
+            shootingAudio.Play();
+            currentLaunchForce = minLaunchForce;
+        }
     }
 
 }

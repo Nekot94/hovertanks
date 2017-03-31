@@ -8,7 +8,7 @@ public class CameraControl : MonoBehaviour {
     public float screenEdgeBuffer = 4f;
     public float minSize = 6.5f;
 
-    // [HideInInspector]
+    [HideInInspector]
     public Transform[] targets;
 
     private Camera camera;
