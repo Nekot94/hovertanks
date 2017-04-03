@@ -23,12 +23,12 @@ public class TankManager
     private TankMovement movement;
     private TankShooting shooting;
     private GameObject canvasGameObject;
-    //private StateController stateController<>;
-
+    private StateController stateController;
+    
     public void SetupAI(List<Transform> wayPointList)
     {
-        //stateController = instance.GetComponent<StateController>();
-        //stateController.SetupAI(true, wayPointList);
+        stateController = instance.GetComponent<StateController>();
+        stateController.SetupAI(true, wayPointList);
 
         shooting = instance.GetComponent<TankShooting>();
 
@@ -72,8 +72,8 @@ public class TankManager
         if (movement != null)
             movement.enabled = false;
 
-        //if (stateController != null)
-        //    stateController.enabled = false;
+        if (stateController != null)
+            stateController.enabled = false;
 
         shooting.enabled = false;
 
@@ -86,8 +86,8 @@ public class TankManager
         if (movement != null)
             movement.enabled = true;
 
-        //if (stateController != null)
-        //    stateController.enabled = true;
+        if (stateController != null)
+            stateController.enabled = true;
 
         shooting.enabled = true;
 
