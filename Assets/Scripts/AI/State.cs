@@ -7,12 +7,12 @@ public class State : ScriptableObject
 {
     public Action[] actions;
     public Color sceneGizmoColor = Color.grey;
-    // public Transition[] transitions;
+    public Transition[] transitions;
 
     public void UpdateState(StateController controller)
     {
         DoActions(controller);
-        // CheckTransitions(controller);
+        CheckTransitions(controller);
     }
 
     public void DoActions(StateController controller)
@@ -22,4 +22,22 @@ public class State : ScriptableObject
             actions[i].Act(controller);
         }
     }
+    private void CheckTransitions(StateController controller)
+    {
+        for (int i = 0; i < transitions.Length; i++)
+        {
+            bool decisionSucceded = transitions[i].decision.Decide(controller);
+            if (decisionSucceded)
+            {
+                controller.TransitionToState(transitions[i].trueState);
+
+            }
+            else
+            {
+                controller.TransitionToState(transitions[i].falseState);
+            }
+
+        }
+    }
 }
+
