@@ -8,7 +8,7 @@ public class ChaceAction : Action
 
     public override void Act(StateController controller)
     {
-
+        Chase(controller);
     }
     private void Chase (StateController controller)
     {
