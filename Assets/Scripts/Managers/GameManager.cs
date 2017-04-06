@@ -207,4 +207,10 @@ public class GameManager : MonoBehaviour
             tanks[i].DisableControl();
         }
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(0);
+    }
+
 }
